@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Document Management - Explorer",
+    "path": "documents/explorer",
+    "pageTitle": "Document Explorer",
+    "options": {
+      "paragraphText": "Search for a document above to modify its boost or hide it from searches."
+    }
+  },
+  {
+    "name": "Connectors - Add Connector",
+    "path": "add-connector",
+    "pageTitle": "Add Connector",
+    "options": {
+      "subHeaderText": "Storage"
+    }
+  },
+  {
+    "name": "Custom Assistants - Assistants",
+    "path": "assistants",
+    "pageTitle": "Assistants",
+    "options": {
+      "paragraphText": "^Assistants are a way to build"
+    }
+  },
+  {
+    "name": "Configuration - Document Processing",
+    "path": "configuration/document-processing",
+    "pageTitle": "Document Processing",
+    "options": {
+      "subHeaderText": "Process with Unstructured API"
+    }
+  },
+  {
+    "name": "Document Management - Document Sets",
+    "path": "documents/sets",
+    "pageTitle": "Document Sets",
+    "options": {
+      "paragraphText": "^Document Sets allow you to group logically connected documents into a single bundle."
+    }
+  },
+  {
+    "name": "Custom Assistants - Slack Bots",
+    "path": "bots",
+    "pageTitle": "Slack Bots",
+    "options": {
+      "paragraphText": "^Setup Slack bots that connect to Danswer."
+    }
+  },
+  {
+    "name": "Custom Assistants - Standard Answers",
+    "path": "standard-answer",
+    "pageTitle": "Standard Answers",
+    "options": {
+      "paragraphText": "^Manage the standard answers for pre-defined questions."
+    }
+  },
+  {
+    "name": "Performance - Usage Statistics",
+    "path": "performance/usage",
+    "pageTitle": "Usage Statistics",
+    "options": {
+      "subHeaderText": "Usage"
+    }
+  },
+  {
+    "name": "Document Management - Feedback",
+    "path": "documents/feedback",
+    "pageTitle": "Document Feedback",
+    "options": {
+      "subHeaderText": "Most Liked Documents"
+    }
+  },
+  {
+    "name": "Configuration - LLM",
+    "path": "configuration/llm",
+    "pageTitle": "LLM Setup",
+    "options": {
+      "paragraphText": "^Token rate limits enable you control how many tokens can be spent in a given time period.",
+      "buttonName": "Create a Token Rate Limit",
+      "subHeaderText": "Enabled LLM Providers"
+    }
+  },
+  {
+    "name": "Connectors - Existing Connectors",
+    "path": "indexing/status",
+    "pageTitle": "Existing Connectors",
+    "options": {
+      "paragraphText": "^It looks like you don't have any connectors setup yet."
+    }
+  },
+  {
+    "name": "Custom Assistants - Prompt Library",
+    "path": "prompt-library",
+    "pageTitle": "Prompt Library",
+    "options": {
+      "paragraphText": "^Create prompts that can be accessed"
+    }
+  },
+  {
+    "name": "User Management - Groups",
+    "path": "groups",
+    "pageTitle": "Manage User Groups",
+    "options": {
+      "buttonName": "Create New User Group"
+    }
+  },
+  {
+    "name": "Performance - Whitelabeling",
+    "path": "whitelabeling",
+    "pageTitle": "Whitelabeling",
+    "options": {
+      "buttonName": "Update"
+    }
+  },
+  {
+    "name": "Configuration - Search Settings",
+    "path": "configuration/search",
+    "pageTitle": "Search Settings",
+    "options": {
+      "subHeaderText": "Embedding Model"
+    }
+  },
+  {
+    "name": "Custom Assistants - Tools",
+    "path": "tools",
+    "pageTitle": "Tools",
+    "options": {
+      "paragraphText": "Tools allow assistants to retrieve information or take actions."
+    }
+  },
+  {
+    "name": "User Management - Token Rate Limits",
+    "path": "token-rate-limits",
+    "pageTitle": "Token Rate Limits",
+    "options": {
+      "paragraphText": "^Token rate limits enable you control how many tokens can be spent in a given time period.",
+      "buttonName": "Create a Token Rate Limit",
+      "subHeaderText": "Global Token Rate Limits"
+    }
+  }
+]
