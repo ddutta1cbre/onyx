@@ -240,7 +240,6 @@ export function TextFormField({
           data-testid={name}
           name={name}
           id={name}
-          aria-label={name}
           className={`
             ${small && sizeClass.input}
             border 
