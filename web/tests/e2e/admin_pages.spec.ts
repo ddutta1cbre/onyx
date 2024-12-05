@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { verifyAdminPageNavigation } from "./utils/adminSetup";
+import { verifyAdminPageNavigation } from "./utils/admin_setup";
 import testCases from "./testcases.json";
 
 for (const testCase of testCases) {
