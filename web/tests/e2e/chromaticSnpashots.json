@@ -67,10 +67,7 @@
   {
     "name": "Connectors - Existing Connectors",
     "path": "indexing/status",
-    "pageTitle": "Existing Connectors",
-    "options": {
-      "paragraphText": "It looks like you don't have any connectors setup yet. Visit the Add Connector page to get started!"
-    }
+    "pageTitle": "Existing Connectors"
   },
   {
     "name": "Custom Assistants - Prompt Library",
