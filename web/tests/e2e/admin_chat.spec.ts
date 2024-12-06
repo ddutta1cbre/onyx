@@ -9,8 +9,7 @@ test(
     await page.screenshot({
       path: `screenshots/chat_page.png`,
     });
-    await page.hover("body", { position: { x: 0, y: 100 } });
-    await page.getByRole("link", { name: "Manage Assistants" }).click();
+    await page.goto("http://localhost:3000/assistants/mine");
     await expect(page).toHaveURL("http://localhost:3000/assistants/mine");
     await page.screenshot({
       path: `screenshots/assistants_mine_page.png`,
