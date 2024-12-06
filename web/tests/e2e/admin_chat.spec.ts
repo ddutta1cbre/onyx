@@ -5,17 +5,7 @@ test(
     tag: "@admin",
   },
   async ({ page }) => {
-    await page.goto("http://localhost:3000/chat");
-    await page.screenshot({
-      path: `screenshots/chat_page.png`,
-    });
-    await page.goto("http://localhost:3000/assistants/mine");
-    await expect(page).toHaveURL("http://localhost:3000/assistants/mine");
-    await page.screenshot({
-      path: `screenshots/assistants_mine_page.png`,
-    });
-
-    await page.getByRole("button", { name: "Create New Assistant" }).click();
+    await page.goto("http://localhost:3000/assistants/new");
     await expect(page).toHaveURL("http://localhost:3000/assistants/new");
     await page.screenshot({
       path: `screenshots/create_assistant_page.png`,
