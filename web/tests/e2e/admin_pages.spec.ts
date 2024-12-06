@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import testCases from "./testcases.json";
+import chromaticSnpashots from "./chromaticSnpashots.json";
 import type { Page } from "@playwright/test";
 
 async function verifyAdminPageNavigation(
@@ -34,18 +34,18 @@ async function verifyAdminPageNavigation(
   }
 }
 
-for (const testCase of testCases) {
+for (const chromaticSnapshot of chromaticSnpashots) {
   test(
-    `Admin - ${testCase.name}`,
+    `Admin - ${chromaticSnapshot.name}`,
     {
       tag: "@admin",
     },
     async ({ page }) => {
       await verifyAdminPageNavigation(
         page,
-        testCase.path,
-        testCase.pageTitle,
-        testCase.options
+        chromaticSnapshot.path,
+        chromaticSnapshot.pageTitle,
+        chromaticSnapshot.options
       );
     }
   );
