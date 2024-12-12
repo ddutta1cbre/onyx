@@ -403,6 +403,7 @@ def litellm_rerank(
 async def process_embed_request(
     embed_request: EmbedRequest,
 ) -> EmbedResponse:
+    logger.info(f"Received embed_request request: {embed_request.model_dump_json()}")
     if not embed_request.texts:
         raise HTTPException(status_code=400, detail="No texts to be embedded")
     elif not all(embed_request.texts):
@@ -439,6 +440,7 @@ async def process_embed_request(
 @router.post("/cross-encoder-scores")
 async def process_rerank_request(rerank_request: RerankRequest) -> RerankResponse:
     """Cross encoders can be purely black box from the app perspective"""
+    logger.info(f"Received rerank request: {rerank_request.model_dump_json()}")
     if INDEXING_ONLY:
         raise RuntimeError("Indexing model server should not call intent endpoint")
 

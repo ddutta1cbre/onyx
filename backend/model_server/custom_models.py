@@ -51,8 +51,9 @@ def get_local_connector_classifier(
     if _CONNECTOR_CLASSIFIER_MODEL is None:
         try:
             # Calculate where the cache should be, then load from local if available
+            logger.debug(f"Loading model from local cache: {model_name_or_path} {tag}")
             local_path = snapshot_download(
-                repo_id=model_name_or_path, revision=tag, local_files_only=True
+                repo_id=model_name_or_path, revision=tag, local_files_only=True, force_download=True
             )
             _CONNECTOR_CLASSIFIER_MODEL = ConnectorClassifier.from_pretrained(
                 local_path
@@ -61,8 +62,8 @@ def get_local_connector_classifier(
             logger.warning(f"Failed to load model directly: {e}")
             try:
                 # Attempt to download the model snapshot
-                logger.info(f"Downloading model snapshot for {model_name_or_path}")
-                local_path = snapshot_download(repo_id=model_name_or_path, revision=tag)
+                logger.info(f"Downloading model snapshot for {model_name_or_path} tag-{tag}")
+                local_path = snapshot_download(repo_id=model_name_or_path, revision=tag, force_download=True)
                 _CONNECTOR_CLASSIFIER_MODEL = ConnectorClassifier.from_pretrained(
                     local_path
                 )
@@ -93,7 +94,7 @@ def get_local_intent_model(
             # Calculate where the cache should be, then load from local if available
             logger.notice(f"Loading model from local cache: {model_name_or_path}")
             local_path = snapshot_download(
-                repo_id=model_name_or_path, revision=tag, local_files_only=True
+                repo_id=model_name_or_path, revision=tag, local_files_only=True, force_download=True
             )
             _INTENT_MODEL = HybridClassifier.from_pretrained(local_path)
             logger.notice(f"Loaded model from local cache: {local_path}")
@@ -102,7 +103,7 @@ def get_local_intent_model(
             try:
                 # Attempt to download the model snapshot
                 logger.notice(f"Downloading model snapshot for {model_name_or_path}")
-                local_path = snapshot_download(repo_id=model_name_or_path, revision=tag)
+                local_path = snapshot_download(repo_id=model_name_or_path, revision=tag, force_download=True)
                 _INTENT_MODEL = HybridClassifier.from_pretrained(local_path)
             except Exception as e:
                 logger.error(

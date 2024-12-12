@@ -102,8 +102,11 @@ services:
       - ENABLE_PAID_ENTERPRISE_EDITION_FEATURES=${ENABLE_PAID_ENTERPRISE_EDITION_FEATURES:-false}
       - API_KEY_HASH_ROUNDS=${API_KEY_HASH_ROUNDS:-}
       # Seeding configuration
+      - REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    volumes:
+      - /Users/DDutta3/projects/cert/ca2.crt:/etc/ssl/certs/ca-certificates.crt
     logging:
       driver: json-file
       options:
@@ -213,8 +216,12 @@ services:
 
       # Enterprise Edition stuff
       - ENABLE_PAID_ENTERPRISE_EDITION_FEATURES=${ENABLE_PAID_ENTERPRISE_EDITION_FEATURES:-false}
+      - REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+      - SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    volumes:
+      - /Users/DDutta3/projects/cert/ca2.crt:/etc/ssl/certs/ca-certificates.crt
     logging:
       driver: json-file
       options:
@@ -276,13 +283,15 @@ services:
     environment:
       - MIN_THREADS_ML_MODELS=${MIN_THREADS_ML_MODELS:-}
       # Set to debug to get more fine-grained logs
-      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_LEVEL=${LOG_LEVEL:-debug}
 
       # Analytics Configs
       - SENTRY_DSN=${SENTRY_DSN:-}
+      - REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     volumes:
       # Not necessary, this is just to reduce download time during startup
       - model_cache_huggingface:/root/.cache/huggingface/
+      - /Users/DDutta3/projects/cert/ca2.crt:/etc/ssl/certs/ca-certificates.crt
     logging:
       driver: json-file
       options:
@@ -307,14 +316,16 @@ services:
       - MIN_THREADS_ML_MODELS=${MIN_THREADS_ML_MODELS:-}
       - INDEXING_ONLY=True
       # Set to debug to get more fine-grained logs
-      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_LEVEL=${LOG_LEVEL:-debug}
       - CLIENT_EMBEDDING_TIMEOUT=${CLIENT_EMBEDDING_TIMEOUT:-}
 
       # Analytics Configs
       - SENTRY_DSN=${SENTRY_DSN:-}
+      - REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     volumes:
       # Not necessary, this is just to reduce download time during startup
       - indexing_huggingface_model_cache:/root/.cache/huggingface/
+      - /Users/DDutta3/projects/cert/ca2.crt:/etc/ssl/certs/ca-certificates.crt
     logging:
       driver: json-file
       options:

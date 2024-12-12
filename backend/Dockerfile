@@ -38,7 +38,6 @@ RUN apt-get update && \
     apt-get clean
 
 
-
 # Install Python dependencies
 # Remove py which is pulled in by retry, py is not needed and is a CVE
 COPY ./requirements/default.txt /tmp/requirements.txt
@@ -72,7 +71,12 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
     rm -f /usr/local/lib/python3.11/site-packages/tornado/test/test.key
+COPY ./certs/ca2.crt /etc/ssl/certs/custom-ca-certificates.crt
 
+# Set environment variables for urllib3 and requests
+ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/custom-ca-certificates.crt
+ENV SSL_CERT_FILE=/etc/ssl/certs/custom-ca-certificates.crt
+    
 # Pre-downloading models for setups with limited egress
 RUN python -c "from tokenizers import Tokenizer; \
 Tokenizer.from_pretrained('nomic-ai/nomic-embed-text-v1')"

@@ -91,10 +91,10 @@ If using PowerShell, the command slightly differs:
 
 Install the required python dependencies:
 ```bash
-pip install -r danswer/backend/requirements/default.txt
-pip install -r danswer/backend/requirements/dev.txt
-pip install -r danswer/backend/requirements/ee.txt
-pip install -r danswer/backend/requirements/model_server.txt
+pip install -r backend/requirements/default.txt
+pip install -r backend/requirements/dev.txt
+pip install -r backend/requirements/ee.txt
+pip install -r backend/requirements/model_server.txt
 ```
 
 Install Playwright for Python (headless browser required by the Web Connector)
@@ -119,7 +119,8 @@ You will need Docker installed to run these containers.
 
 First navigate to `danswer/deployment/docker_compose`, then start up Postgres/Vespa/Redis with:
 ```bash
-docker compose -f docker-compose.dev.yml -p danswer-stack up -d index relational_db cache
+docker compose -f docker-compose.dev.yml -p danswer-stack up -d index relational_db cache 
+
 ```
 (index refers to Vespa, relational_db refers to Postgres, and cache refers to Redis)
 
@@ -134,6 +135,7 @@ Next, start the model server which runs the local NLP models.
 Navigate to `danswer/backend` and run:
 ```bash
 uvicorn model_server.main:app --reload --port 9000
+REQUESTS_CA_BUNDLE=certs/ca2.crt SSL_CERT_FILE=certs/ca2.crt uvicorn model_server.main:app --reload --port 9000
 ```
 
 _For Windows (for compatibility with both PowerShell and Command Prompt):_

@@ -16,6 +16,12 @@ RUN echo "DANSWER_VERSION: ${DANSWER_VERSION}"
 FROM base AS builder
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
+COPY ./certs/ca2.crt /etc/ssl/certs/custom-ca-certificates.crt
+
+# Set environment variables for urllib3 and requests
+ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/custom-ca-certificates.crt
+ENV SSL_CERT_FILE=/etc/ssl/certs/custom-ca-certificates.crt
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/custom-ca-certificates.crt
 WORKDIR /app
 
 # pull in source code / package.json / package-lock.json

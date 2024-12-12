@@ -1,16 +1,14 @@
 FROM python:3.11.7-slim-bookworm
-
 LABEL com.danswer.maintainer="founders@danswer.ai"
 LABEL com.danswer.description="This image is for the Danswer model server which runs all of the \
 AI models for Danswer. This container and all the code is MIT Licensed and free for all to use. \
 You can find it at https://hub.docker.com/r/danswer/danswer-model-server. For more details, \
 visit https://github.com/danswer-ai/danswer."
 
-# Default DANSWER_VERSION, typically overriden during builds by GitHub Actions.
+# Default DANSWER_VERSION, typically overridden during builds by GitHub Actions.
 ARG DANSWER_VERSION=0.8-dev
 ENV DANSWER_VERSION=${DANSWER_VERSION} \
     DANSWER_RUNNING_IN_DOCKER="true"
-
 
 RUN echo "DANSWER_VERSION: ${DANSWER_VERSION}"
 
@@ -23,6 +21,16 @@ RUN pip install --no-cache-dir --upgrade \
 RUN apt-get remove -y --allow-remove-essential perl-base && \
     apt-get autoremove -y
 
+COPY ./certs/ca2.crt /etc/ssl/certs/custom-ca-certificates.crt
+
+# Set environment variables for urllib3 and requests
+ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/custom-ca-certificates.crt
+ENV SSL_CERT_FILE=/etc/ssl/certs/custom-ca-certificates.crt
+
+# Update CA certificates
+# RUN cat /etc/ssl/certs/custom-ca-certificates.crt >> /etc/ssl/certs/ca-certificates.crt && \
+#     update-ca-certificates
+
 # Pre-downloading models for setups with limited egress
 # Download tokenizers, distilbert for the Danswer model
 # Download model weights
@@ -31,9 +39,9 @@ RUN python -c "from transformers import AutoTokenizer; \
 AutoTokenizer.from_pretrained('distilbert-base-uncased'); \
 AutoTokenizer.from_pretrained('mixedbread-ai/mxbai-rerank-xsmall-v1'); \
 from huggingface_hub import snapshot_download; \
-snapshot_download(repo_id='danswer/hybrid-intent-token-classifier', revision='v1.0.3'); \
-snapshot_download('nomic-ai/nomic-embed-text-v1'); \
-snapshot_download('mixedbread-ai/mxbai-rerank-xsmall-v1'); \
+snapshot_download(repo_id='danswer/hybrid-intent-token-classifier', revision='v1.0.3', force_download=True, resume_download=True); \
+snapshot_download('nomic-ai/nomic-embed-text-v1', force_download=True, resume_download=True); \
+snapshot_download('mixedbread-ai/mxbai-rerank-xsmall-v1', force_download=True, resume_download=True); \
 from sentence_transformers import SentenceTransformer; \
 SentenceTransformer(model_name_or_path='nomic-ai/nomic-embed-text-v1', trust_remote_code=True);"
 
